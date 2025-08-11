@@ -1,33 +1,31 @@
-# Express.js on Vercel
+## DNV Server
 
-Simple Express.js + Vercel example that uses Vercel Postgres to add and display users in a table.
+Express server for Da Nang Villas payments and pricing.
 
-## How to Use
+### Setup
 
-BE sure to create a Vercel Postgres database and add you environment variables to your `.env` file. You can find an example of the `.env` file in the `.env.example` file.
-
-You can choose from one of the following two methods to use this repository:
-
-### One-Click Deploy
-
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=vercel-examples):
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/examples/tree/main/solutions/express&project-name=express&repository-name=express)
-
-### Clone and Deploy
-
-```bash
-git clone https://github.com/vercel/examples/tree/main/solutions/express
+1. Create a `.env` file with:
+```
+STRIPE_PRIVATE_KEY=sk_test_...
+CLIENT_URL=http://localhost:3000
 ```
 
-Install the Vercel CLI:
-
-```bash
-npm i -g vercel
+2. Install dependencies:
+```
+npm install
 ```
 
-Then run the app at the root of the repository:
-
-```bash
-vercel dev
+3. Run locally:
 ```
+npm run dev
+```
+Visit `http://localhost:3000`.
+
+### API
+- POST `/create-checkout-session`: accepts `{ items: [{ name, amountInCents, quantity }] }` and returns `{ url }` for Stripe Checkout.
+- POST `/reserve`: accepts booking details; creates Stripe session based on calculated line items.
+- POST `/calculate-price`: returns calculated totals for a stay.
+- GET/POST `/health`: simple health check.
+
+### Deploy on Vercel
+This app is configured with `vercel.json` to run as a Node serverless function.
