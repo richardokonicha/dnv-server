@@ -81,7 +81,11 @@ app.post('/reserve', async (req, res) => {
     const base = (process.env.CLIENT_URL || `${proto}://${host}`).replace(/\/$/, '');
     const villasBase = (process.env.VILLAS_DETAILS_BASE_URL || '').replace(/\/$/, '');
     const successUrl = (process.env.SUCCESS_URL || (villasBase && villaSlug ? `${villasBase}/${villaSlug}` : `${base}/success.html`)).replace(/\/$/, '');
-    const cancelUrl = (process.env.CANCEL_URL || (villasBase && villaSlug ? `${villasBase}/${villaSlug}` : `${base}/cancel.html`)).replace(/\/$/, '');
+    const cancelUrl = (villasBase && villaSlug
+      ? `${villasBase}/${villaSlug}`
+      : `${base}/cancel.html`
+    ).replace(/\/$/, '') + `?check_in=${encodeURIComponent(checkIn)}&check_out=${encodeURIComponent(checkOut)}`;
+    
 
     const line_items = lineItems.map((item) => ({
       price_data: {
