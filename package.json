@@ -4,8 +4,8 @@
   "description": "Express server for Da Nang Villas",
   "main": "api/index.js",
   "scripts": {
-    "dev": "node server.js",
-    "start": "node server.js",
+    "dev": "node api.js && node server.js",
+    "start": "node api.js && node server.js",
     "vercel": "node -e \"require('./api')\"",
     "test": "echo \"No tests configured\" && exit 0"
   },
@@ -15,7 +15,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.4.1",
-    "express": "^4.18.2",
+    "express": "^5.2.1",
     "stripe": "^16.0.0"
   }
 }
