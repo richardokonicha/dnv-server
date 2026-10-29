@@ -4,8 +4,8 @@
   "description": "Express server for Da Nang Villas",
   "main": "api/index.js",
   "scripts": {
-    "dev": "node api.js && node server.js",
-    "start": "node api.js && node server.js",
+    "dev": "node init && node server.js",
+    "start": "node init && node server.js",
     "vercel": "node -e \"require('./api')\"",
     "test": "echo \"No tests configured\" && exit 0"
   },
